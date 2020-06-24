@@ -2,7 +2,8 @@
 #
 # Init database
 
-db_name='wordpress_db'
+wp_db_name='wordpress_db'
+phpmyadmin_db_name='phpmyadmin'
 username='admin'
 userpassword='admin'
 hostname='localhost'
@@ -14,14 +15,15 @@ service mysql start
 mysql -e "CREATE USER '$username'@'$hostname' IDENTIFIED BY '$userpassword'"
 
 # phpMyAdmin database
-#mysql -e "GRANT ALL PRIVILEGES ON phpmyadmin.* TO '$username'@'$hostname';"
-mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$username'@'$hostname';"
+mysql -e "CREATE DATABASE $phpmyadmin_db_name;"
+mysql -e "GRANT ALL PRIVILEGES ON $phpmyadmin_db_name.* TO '$username'@'$hostname';"
 mysql -e "FLUSH PRIVILEGES;"
 
 # Wordpress database
-mysql -e "CREATE DATABASE $db_name;"
-mysql -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$username'@'$hostname';"
+mysql -e "CREATE DATABASE $wp_db_name;"
+mysql -e "GRANT ALL PRIVILEGES ON $wp_db_name.* TO '$username'@'$hostname';"
 mysql -e "FLUSH PRIVILEGES;"
 
-mysql $db_name -u root < /root/wordpress_db.sql
+mysql $wp_db_name -u root < /root/wordpress_db.sql
+mysql $phpmyadmin_db_name -u root < /root/phpmyadmin.sql
 rm /root/wordpress_db.sql

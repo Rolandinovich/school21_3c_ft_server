@@ -1,13 +1,12 @@
-SHELL = /bin/sh
 DOCKER_USER := admin
-IMAGE := ft_server
-DOCKER_NAME := ft_server1
+IMAGE := ft_server_image
+DOCKER_NAME := ft_server_container
 
 build:
 	docker build -t $(IMAGE) .
 
 run:
-	docker run -it -p 80:80 -p 443:443 --name $(DOCKER_NAME) $(IMAGE) -d
+	docker run -it -p 80:80 -p 443:443 --name $(DOCKER_NAME) $(IMAGE)
 
 up: build run
 
@@ -17,10 +16,9 @@ stop:
 rm: stop
 	docker rm $(DOCKER_NAME)
 
-rmi:
+rmi: rm
 	docker rmi $(IMAGE)
 
-.PHONY: clean
 clean: rm rmi
 
 autoindex-on:

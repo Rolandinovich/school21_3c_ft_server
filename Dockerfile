@@ -44,6 +44,7 @@ RUN cd /etc/ssl/certs/ \
 #  Init database
 COPY srcs/init_db.sh /scripts/
 COPY srcs/wordpress_db.sql /root/
+COPY srcs/phpmyadmin.sql /root/
 RUN bash scripts/init_db.sh
 
 EXPOSE 80 443
