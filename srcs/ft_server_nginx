@@ -20,7 +20,7 @@ server {
         index index.html index.php;
 
         location / {
-            autoindex off;
+            autoindex on;
             try_files $uri $uri/ =404;
         }
 
