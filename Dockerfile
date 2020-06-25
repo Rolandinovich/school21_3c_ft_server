@@ -23,13 +23,12 @@ RUN cd /tmp/ && wget https://wordpress.org/latest.tar.gz \
 COPY srcs/wp-config.php /var/www/ft_server/wordpress
 
 # Set up NGINX
-RUN mkdir -p /var/www/ft_server/html/ \
- && chown -R www-data:www-data /var/www/ft_server \
+RUN chown -R www-data:www-data /var/www/ft_server \
  && service nginx start
 COPY srcs/ft_server_nginx /etc/nginx/sites-available/ft_server
 RUN ln -s /etc/nginx/sites-available/ft_server /etc/nginx/sites-enabled/ \
  && rm /etc/nginx/sites-enabled/default
-COPY srcs/index.html /var/www/ft_server/html/
+COPY srcs/index.html /var/www/ft_server/
 
 # Generate a self-signed certificate and private key using OpenSSL
 RUN cd /etc/ssl/certs/ \

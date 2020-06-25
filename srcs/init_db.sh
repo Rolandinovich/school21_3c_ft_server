@@ -24,6 +24,7 @@ mysql -e "CREATE DATABASE $wp_db_name;"
 mysql -e "GRANT ALL PRIVILEGES ON $wp_db_name.* TO '$username'@'$hostname';"
 mysql -e "FLUSH PRIVILEGES;"
 
+# Restore backups
 mysql $wp_db_name -u root < /root/wordpress_db.sql
 mysql $phpmyadmin_db_name -u root < /root/phpmyadmin.sql
 rm /root/wordpress_db.sql

@@ -13,6 +13,9 @@ up: build run
 stop:
 	docker stop $(DOCKER_NAME)
 
+start:
+	docker start $(DOCKER_NAME)
+
 rm: stop
 	docker rm $(DOCKER_NAME)
 
